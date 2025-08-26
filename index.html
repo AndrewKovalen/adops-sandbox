@@ -1,54 +1,65 @@
-<!-- <!doctype html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="utf-8">
-  <title>Publisher Test</title>
-  <style>
-    .ad { width:300px; height:250px; border:1px solid #ccc; display:flex; align-items:center; justify-content:center; font-family:sans-serif; }
-    .wrap { margin:40px; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <h2>Publisher-Seite (Test)</h2>
+  <head>
+    <meta charset="utf-8">
+    <title>Publisher Test</title>
+    <style>
+      .ad { width:300px; height:250px; border:1px solid #ccc; display:flex; align-items:center; justify-content:center; font-family:sans-serif; }
+      .wrap { margin:40px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h2>Publisher-Seite (Test)</h2>
+  
+      <div class="ad">
+        <a id="clickTag" href="click.html" target="_blank" rel="noopener">JETZT KAUFEN</a>
+      </div>
+  
+      <!-- IMPRESSION-PIXEL -->
+      <img
+        id = "imp"
+        src="" width="1" height="1" 
+        style="position:absolute;left:-9999px;top:-9999px;" 
+        alt="">
 
-    <div class="ad">
-      <a id="clickTag" href="#" target="_blank" rel="noopener">JETZT KAUFEN</a>
+      <script>
+
+        // Cachebuster für Impressionen-Pixel
+        const cachebuster = Math.floor(Math.random() * 1e9);
+        document.getElementById('imp').src = 
+          'https://httpbin.org/image/png?event=impression&campaign=demo123&cb=' + cachebuster;
+        
+        // === Landing-URL aufbauen ===
+        const finalLanding = new URL('https://andrewkovalen.github.io/adops-sandbox/landing.html');
+        finalLanding.searchParams.set('utm_source','testsuite');
+        finalLanding.searchParams.set('utm_medium','display');
+        finalLanding.searchParams.set('utm_campaign','sandbox_campaign');
+        finalLanding.searchParams.set('utm_content','creative_a');
+        document.getElementById('clickTag').href = finalLanding.toString();
+      </script>
+  
+      <p>Öffne DevTools → Network, lade neu und suche nach <code>event=impression</code>.</p>
     </div>
+  
+    <script>
+      // === ANPASSEN: GitHub Pages URL oder relativer Pfad ===
+      // Beispiel GitHub Pages:
+      // const finalLanding = new URL('https://DEIN-USER.github.io/adops-sandbox/landing.html');
+      // Lokal:
+      const finalLanding = new URL(window.location.origin + window.location.pathname.replace('index.html','') + 'landing.html');
+  
+      // UTMs anhängen
+      finalLanding.searchParams.set('utm_source', 'testsuite');
+      finalLanding.searchParams.set('utm_medium', 'display');
+      finalLanding.searchParams.set('utm_campaign', 'sandbox_campaign');
+      finalLanding.searchParams.set('utm_content', 'creative_a');
+  
+      // Click-Tracker (Redirect) via httpbin
+      const clickTracker = 'https://httpbin.org/redirect-to?url=' + encodeURIComponent(finalLanding.toString());
+      document.getElementById('clickTag').setAttribute('href', clickTracker);
+    </script>
+  </body>
+</html>
 
-    <!-- IMPRESSION-PIXEL -->
-    <img
-      src="https://httpbin.org/image/png?event=impression&campaign=demo123&cb=<?=Date.now()?>"
-      width="1" height="1" style="position:absolute;left:-9999px;top:-9999px;" alt="">
 
-    <p>Öffne DevTools → Network, lade neu und suche nach <code>event=impression</code>.</p>
-  </div>
-
-  <script>
-    // === ANPASSEN: GitHub Pages URL oder relativer Pfad ===
-    // Beispiel GitHub Pages:
-    // const finalLanding = new URL('https://DEIN-USER.github.io/adops-sandbox/landing.html');
-    // Lokal:
-    const finalLanding = new URL(window.location.origin + window.location.pathname.replace('index.html','') + 'landing.html');
-
-    // UTMs anhängen
-    finalLanding.searchParams.set('utm_source', 'testsuite');
-    finalLanding.searchParams.set('utm_medium', 'display');
-    finalLanding.searchParams.set('utm_campaign', 'sandbox_campaign');
-    finalLanding.searchParams.set('utm_content', 'creative_a');
-
-    // Click-Tracker (Redirect) via httpbin
-    const clickTracker = 'https://httpbin.org/redirect-to?url=' + encodeURIComponent(finalLanding.toString());
-    document.getElementById('clickTag').setAttribute('href', clickTracker);
-  </script>
-</body>
-</html> -->
-
-<script>
-  const finalLanding = new URL('https://andrewkovalen.github.io/adops-sandbox/landing.html');
-  finalLanding.searchParams.set('utm_source','testsuite');
-  finalLanding.searchParams.set('utm_medium','display');
-  finalLanding.searchParams.set('utm_campaign','sandbox_campaign');
-  finalLanding.searchParams.set('utm_content','creative_a');
-  document.getElementById('clickTag').href = finalLanding.toString();
-</script>
