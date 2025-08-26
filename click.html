@@ -1,0 +1,19 @@
+<!doctype html><html lang="de"><meta charset="utf-8">
+<title>Redirect…</title>
+<body>
+<script>
+  // (optional) Klick-"Zählung" als Image-Request
+  new Image().src = 'https://httpbin.org/image/png?event=click&campaign=demo123&cb=' + Math.random();
+
+  // Ziel mit UTMs bauen
+  const target = new URL('./landing.html', location.href);
+  target.searchParams.set('utm_source','testsuite');
+  target.searchParams.set('utm_medium','display');
+  target.searchParams.set('utm_campaign','sandbox_campaign');
+  target.searchParams.set('utm_content','creative_a');
+
+  // Weiterleitung
+  setTimeout(() => location.replace(target.toString()), 50);
+</script>
+Redirecting…
+</body></html>
