@@ -1,10 +1,24 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="de">
 <head><meta charset="utf-8"><title>Mock Landing</title></head>
 <body>
   <h1>Danke für den Klick!</h1>
   <p id="qp"></p>
   <script>
+    const qp = window.location.search || '(keine UTM-Parameter gefunden)';
+    document.getElementById('qp').textContent = 'Query: ' + qp;
+  </script>
+</body>
+</html> -->
+
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><title>Mock Landing</title></head>
+<body>
+  <h1>Danke für den Klick!</h1>
+  <p id="qp">Query: (wird gleich gesetzt)</p>
+  <script>
+    // Wichtig: Script NACH dem <p id="qp">
     const qp = window.location.search || '(keine UTM-Parameter gefunden)';
     document.getElementById('qp').textContent = 'Query: ' + qp;
   </script>
