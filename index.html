@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="de">
   <head>
     <meta charset="utf-8">
@@ -60,6 +60,34 @@
       document.getElementById('clickTag').setAttribute('href', clickTracker);
     </script>
   </body>
+</html>-->
+
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Publisher Test</title>
+  <style>
+    .ad { width:300px; height:250px; border:1px solid #ccc; display:flex; align-items:center; justify-content:center; font-family:sans-serif; }
+    .wrap { margin:40px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>Publisher-Seite (Test)</h2>
+    <div class="ad">
+      <a id="clickTag" href="click.html" target="_blank" rel="noopener">JETZT KAUFEN</a>
+    </div>
+
+    <!-- Impression-Pixel -->
+    <img id="imp" src="" width="1" height="1" style="position:absolute;left:-9999px;top:-9999px" alt="">
+    <p>DevTools → Network → nach <code>event=impression</code> suchen.</p>
+  </div>
+
+  <script>
+    // Cachebuster + Impression
+    document.getElementById('imp').src =
+      'https://httpbin.org/image/png?event=impression&campaign=demo123&cb=' + Math.floor(Math.random()*1e9);
+  </script>
+</body>
 </html>
-
-
