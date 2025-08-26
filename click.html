@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><meta charset="utf-8">
+<!-- <!doctype html><html lang="de"><meta charset="utf-8">
 <title>Redirect…</title>
 <body>
 <script>
@@ -16,4 +16,26 @@
   setTimeout(() => location.replace(target.toString()), 50);
 </script>
 Redirecting…
-</body></html>
+</body></html> -->
+
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><title>Klick-Redirect</title></head>
+<body>
+<script>
+  // Klick-"Zählung"
+  new Image().src = 'https://httpbin.org/image/png?event=click&campaign=demo123&cb=' + Math.random();
+
+  // Ziel mit UTMs
+  const target = new URL('./landing.html', location.href);
+  target.searchParams.set('utm_source','testsuite');
+  target.searchParams.set('utm_medium','display');
+  target.searchParams.set('utm_campaign','sandbox_campaign');
+  target.searchParams.set('utm_content','creative_a');
+
+  // Weiterleitung
+  setTimeout(() => location.replace(target.toString()), 50);
+</script>
+Redirecting…
+</body>
+</html>
