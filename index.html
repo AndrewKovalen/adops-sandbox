@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8">
@@ -42,4 +42,13 @@
     document.getElementById('clickTag').setAttribute('href', clickTracker);
   </script>
 </body>
-</html>
+</html> -->
+
+<script>
+  const finalLanding = new URL('https://andrewkovalen.github.io/adops-sandbox/landing.html');
+  finalLanding.searchParams.set('utm_source','testsuite');
+  finalLanding.searchParams.set('utm_medium','display');
+  finalLanding.searchParams.set('utm_campaign','sandbox_campaign');
+  finalLanding.searchParams.set('utm_content','creative_a');
+  document.getElementById('clickTag').href = finalLanding.toString();
+</script>
